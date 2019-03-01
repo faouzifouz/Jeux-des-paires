@@ -1,0 +1,126 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  @font-face{
+    font-family: 'Gamer';
+      src: url("../css/fonts/Gamer.ttf");
+  }
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url(../img/background.jpg)  ;
+    
+    //style du titre
+    h1{
+        font-family: Gamer,sans-serif;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 5em;
+        color: #509097;
+
+    }
+  }
+  //style du timer
+  .info {
+    margin-bottom: 40px;
+    font-size: 22px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 800px;
+    max-width: 1200px;
+    color:white;
+}
+  
+  //Ici style du container game
+  .memory-game {
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;//Permet de définir la distance z
+  }
+  //Style des cards j utilise la fonction calc pour faire 3 ligne avec 4 cartes
+  .memory-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;//Pour positionner les éléments dans l'espace 3d creer dans le parent
+    transition: transform .5s;//Ici pour produire l'effet mouvement
+    &:hover{
+      cursor:pointer;
+    }
+    
+    
+  }
+  //Ici j'ajoute un effet au clic sur l'élément transition .2s a sa taille
+  .memory-card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+    
+    
+  }
+  // Je fais tourné la carte avec la class flip
+  .memory-card.flip {
+    transform: rotateY(180deg);
+  }
+  // Ici j'empile les cartes les une sur les autres (position absolute supprime les element de leur position d'origine
+  .front-face,
+  .back-face {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    border-radius: 5px;
+    background:black;
+    opacity:0.80 ;
+    backface-visibility: hidden;//Pour reveler la carte du dessous (donc je la cache car effet miroir)
+  }
+  //Puisque nous avons cache les 2 images les 2 images backface mnt je retourne front-face
+  .front-face {
+    transform: rotateY(180deg);
+
+  }
+//style div bouton
+  .gamereset{
+    display:flex;
+    height: 100px;
+    width: 100%;
+    justify-content: center;
+    //style du bouton
+    .newgame{
+      padding: 12px 100px;
+      //Polygone que j'ai pris sur https://bennettfeely.com/clippy/
+      -webkit-clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+      clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+      font-size: 5em;
+      font-family: 'Gamer';
+      background :linear-gradient(-45deg, #FFA63D, #4bf1ff, #338AFF, #3CF0C5);
+      border:none;
+      &:hover{
+        cursor:pointer;
+      }
+    }
+  }
+
+  .styleretry, .finito{
+    color:red;
+    font-size: 2em;
+    font-family: 'Gamer';
+  }
+  footer{
+    display:flex;
+    justify-content: flex-end;
+    
+    h6{
+      font-size: 1em;
+        color: #509097;
+           
+    }
+  }
